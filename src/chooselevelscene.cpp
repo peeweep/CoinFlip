@@ -1,5 +1,4 @@
 #include "chooselevelscene.h"
-#include <QDebug>
 #include <QLabel>
 #include <QMenuBar>
 #include <QPainter>
@@ -12,7 +11,7 @@ ChooseLevelScene::ChooseLevelScene(QWidget *parent) : QMainWindow(parent) {
   // 配置选择关卡场景
   this->setFixedSize(320, 588);
   // 设置图标
-  this->setWindowIcon(QPixmap(":/resource/coin0001.png"));
+  this->setWindowIcon(QPixmap(":/coin0001.png"));
   // 设置标题
   this->setWindowTitle("选择关卡场景");
   // 创建菜单栏
@@ -25,18 +24,17 @@ ChooseLevelScene::ChooseLevelScene(QWidget *parent) : QMainWindow(parent) {
   // 点击退出 实现退出游戏
   connect(quitAction, &QAction::triggered, [=]() { this->close(); });
   // 选择关卡按钮音效
-  QSound *chooseSound = new QSound(":/resource/go-go-go.wav", this);
+  QSound *chooseSound = new QSound(":/go-go-go.wav", this);
   // 返回音效
-  QSound *backSound = new QSound(":/resource/all-right.wav");
+  QSound *backSound = new QSound(":/all-right.wav");
   // 返回按钮
-  MyPushButton *backBtn = new MyPushButton(":/resource/backbutton_press.png",
-                                           ":/resource/backbutton_release.png");
+  MyPushButton *backBtn =
+      new MyPushButton(":/backbutton_press.png", ":/backbutton_release.png");
   backBtn->setParent(this);
   backBtn->move(this->width() - backBtn->width(),
                 this->height() - backBtn->height());
   // 点击返回
   connect(backBtn, &QPushButton::clicked, [=]() {
-    //    qDebug() << "点击了返回按钮";
     // 播放返回音效
     backSound->play();
     // 告诉主场景 我返回了 主场景监听ChooseLevelScene的返回按钮
@@ -44,15 +42,13 @@ ChooseLevelScene::ChooseLevelScene(QWidget *parent) : QMainWindow(parent) {
   });
   // 创建选择关卡的按钮
   for (int i = 0; i < 20; ++i) {
-    MyPushButton *menuBtn = new MyPushButton(":/resource/levelbord.png");
+    MyPushButton *menuBtn = new MyPushButton(":/levelbord.png");
     menuBtn->setParent(this);
     menuBtn->move(33 + (i % 4) * 70, 130 + (i / 4) * 75);
     // 监听每个按钮的点击事件
     connect(menuBtn, &MyPushButton::clicked, [=]() {
       // 选择关卡的音效
       chooseSound->play();
-      QString str = QString("您选择的是第 %1 关").arg(i + 1);
-      qDebug() << str;
       // 进入到游戏场景
       this->hide();  // 将玄关场景隐藏掉
       play = new PlayScene(i + 1);
@@ -81,10 +77,10 @@ void ChooseLevelScene::paintEvent(QPaintEvent *) {
   // 加载背景
   QPainter painter(this);
   QPixmap  pix;
-  pix.load(":/resource/background1.png");
+  pix.load(":/background1.png");
   painter.drawPixmap(0, 0, this->width(), this->height(), pix);
   // 加载标题
-  pix.load(":/resource/title.png");
+  pix.load(":/title.png");
   pix.scaled(pix.width() * 0.5, pix.height() * 0.5);
   painter.drawPixmap(5, 30, pix);
 }

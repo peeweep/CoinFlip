@@ -1,10 +1,9 @@
 #include "mainscene.h"
 #include <QAction>
-#include <QDebug>
 #include <QPainter>
 #include <QSound>
 #include <QTimer>
-#include "./ui_mainscene.h"
+#include "ui_mainscene.h"
 #include "mypushbutton.h"
 MainScene::MainScene(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainScene) {
@@ -13,14 +12,14 @@ MainScene::MainScene(QWidget *parent)
   // 设置固定大小
   setFixedSize(320, 588);
   // 设置图标
-  setWindowIcon(QIcon(":/resource/coin0001.png"));
+  setWindowIcon(QIcon(":/coin0001.png"));
   setWindowTitle("翻金币主场景");
   // 退出按钮实现
   connect(ui->actionQuit, &QAction::triggered, [=]() { this->close(); });
   // 准备开始按钮音效
-  QSound *startSound = new QSound(":/resource/go-head.wav", this);
+  QSound *startSound = new QSound(":/go-head.wav", this);
   // 开始按钮
-  MyPushButton *startBtn = new MyPushButton(":/resource/start_normal.jpg");
+  MyPushButton *startBtn = new MyPushButton(":/start_normal.jpg");
   startBtn->setParent(this);
   startBtn->move(this->width() * 0.5 - startBtn->width() * 0.5,
                  this->height() * 0.7);
@@ -33,7 +32,6 @@ MainScene::MainScene(QWidget *parent)
     this->setGeometry(chooseScene->geometry());
   });
   connect(startBtn, &QPushButton::clicked, [=]() {
-    //    qDebug() << "点击了开始";
     // 播放开始音效资源
     startSound->play();
     // 弹起特效
@@ -54,10 +52,10 @@ MainScene::~MainScene() { delete ui; }
 void MainScene::paintEvent(QPaintEvent *) {
   QPainter painter(this);
   QPixmap  pix;
-  pix.load(":/resource/playscene.jpg");
+  pix.load(":/playscene.jpg");
   painter.drawPixmap(0, 0, this->width(), this->height(), pix);
   // 画背景上图标
-  pix.load(":/resource/title.png");
+  pix.load(":/title.png");
   pix.scaled(pix.width() * 0.5, pix.height() * 0.5);
   painter.drawPixmap(5, 30, pix);
 }

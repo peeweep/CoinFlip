@@ -18,21 +18,21 @@ SET(QT_USE_MULTIMEDIAWIDGETS TRUE)
 add_executable(
         CoinFlip
         main.cpp
-        mainscene.cpp
-        mainscene.h
-        mainscene.ui
-        res.qrc
-        mypushbutton.cpp
-        mypushbutton.h
-        chooselevelscene.cpp
-        chooselevelscene.h
-        playscene.cpp
-        playscene.h
-        mycoin.cpp
-        mycoin.h
-        leveldataconfig.cpp
-        leveldataconfig.h
-)
+        src/mainscene.cpp
+        src/mainscene.h
+        src/mainscene.ui
+        src/mypushbutton.cpp
+        src/mypushbutton.h
+        src/chooselevelscene.cpp
+        src/chooselevelscene.h
+        src/playscene.cpp
+        src/playscene.h
+        src/mycoin.cpp
+        src/mycoin.h
+        src/leveldataconfig.cpp
+        src/leveldataconfig.h
+        resource/resource.qrc
+        )
 
 
 target_link_libraries(CoinFlip PRIVATE Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets)

@@ -1,5 +1,4 @@
 #include "playscene.h"
-#include <QDebug>
 #include <QLabel>
 #include <QMenuBar>
 #include <QPainter>
@@ -10,14 +9,12 @@
 #include "mycoin.h"
 #include "mypushbutton.h"
 PlayScene::PlayScene(int levelNum) {
-  QString str = QString("进入了第 %1 关").arg(levelNum);
-  qDebug() << str;
   this->levelIndex = levelNum;
   // 初始化游戏场景
   // 设定固定大小
   this->setFixedSize(320, 588);
   // 设定图标
-  this->setWindowIcon(QPixmap(":/resource/coin0001.png"));
+  this->setWindowIcon(QPixmap(":/coin0001.png"));
   // 设定标题
   this->setWindowTitle("翻金币场景");
   // 创建菜单栏
@@ -30,20 +27,19 @@ PlayScene::PlayScene(int levelNum) {
   // 点击退出 实现退出游戏
   connect(quitAction, &QAction::triggered, [=]() { this->close(); });
   // 返回音效
-  QSound *backSound = new QSound(":/resource/all-right.wav");
+  QSound *backSound = new QSound(":/all-right.wav");
   // 翻金币音效
-  QSound *flipSound = new QSound(":/resource/aahhh.wav");
+  QSound *flipSound = new QSound(":/aahhh.wav");
   // 胜利音效
-  QSound *winSound = new QSound(":/resource/dinner-is-served.wav");
+  QSound *winSound = new QSound(":/dinner-is-served.wav");
   // 返回按钮
-  MyPushButton *backBtn = new MyPushButton(":/resource/backbutton_press.png",
-                                           ":/resource/backbutton_release.png");
+  MyPushButton *backBtn =
+      new MyPushButton(":/backbutton_press.png", ":/backbutton_release.png");
   backBtn->setParent(this);
   backBtn->move(this->width() - backBtn->width(),
                 this->height() - backBtn->height());
   // 点击返回
   connect(backBtn, &QPushButton::clicked, [=]() {
-    //    qDebug() << "翻金币场景点击了返回按钮";
     // 播放返回音效
     backSound->play();
     // 告诉主场景 我返回了 主场景监听ChooseLevelScene的返回按钮
@@ -70,7 +66,7 @@ PlayScene::PlayScene(int levelNum) {
   // 胜利图片显示
   QLabel *successLabel = new QLabel;
   QPixmap pix_s;
-  pix_s.load(":/resource/success.png");
+  pix_s.load(":/success.png");
   pix_s = pix_s.scaled(pix_s.width() * 0.6, pix_s.height() * 0.5);
   successLabel->setGeometry(QRect(0, 0, pix_s.width(), pix_s.height()));
   successLabel->setParent(this);
@@ -81,7 +77,7 @@ PlayScene::PlayScene(int levelNum) {
     for (int j = 0; j < 4; ++j) {
       // 绘制背景图片
       QLabel *label = new QLabel;
-      QPixmap pix   = QPixmap(":/resource/coinBord.png");
+      QPixmap pix   = QPixmap(":/coinBord.png");
       label->setGeometry(0, 0, pix.width(), pix.height());
       label->setPixmap(pix);
       label->setParent(this);
@@ -89,14 +85,13 @@ PlayScene::PlayScene(int levelNum) {
       // 创建金币
       //      if (this->gameArray[i][j] == 1) {
       //        // 显示金币
-      //        str = ":/resource/coin0001.png";
+      //        str = ":/coin0001.png";
       //      } else {
       //        // 显示银币
-      //        str = ":/resource/coin0008.png";
+      //        str = ":/coin0008.png";
       //      }
-      str = this->gameArray[i][j] == 1 ? ":/resource/coin0001.png"
-                                       : ":/resource/coin0008.png";
-      MyCoin *coin = new MyCoin(str);
+      str1 = this->gameArray[i][j] == 1 ? ":/coin0001.png" : ":/coin0008.png";
+      MyCoin *coin = new MyCoin(str1);
       coin->setParent(this);
       coin->move(59 + i * 50, 204 + j * 50);
       // 给金币属性赋值
@@ -166,7 +161,6 @@ PlayScene::PlayScene(int levelNum) {
             }
           }
           if (this->isWin == true) {
-            //            qDebug() << "胜利";
             // 添加胜利音效
             QTimer::singleShot(1000, this, [=]() { winSound->play(); });
             // 将所有按钮的胜利标志改为 true
@@ -201,10 +195,10 @@ void PlayScene::paintEvent(QPaintEvent *) {
   // 加载背景
   QPainter painter(this);
   QPixmap  pix;
-  pix.load(":/resource/background1.png");
+  pix.load(":/background1.png");
   painter.drawPixmap(0, 0, this->width(), this->height(), pix);
   // 加载标题
-  pix.load(":/resource/title.png");
+  pix.load(":/title.png");
   pix.scaled(pix.width() * 0.5, pix.height() * 0.5);
   painter.drawPixmap(5, 30, pix);
 }

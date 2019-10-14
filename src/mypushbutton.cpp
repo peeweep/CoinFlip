@@ -1,5 +1,4 @@
 #include "mypushbutton.h"
-#include <QDebug>
 #include <QPropertyAnimation>
 MyPushButton::MyPushButton(QString normalImg, QString pressImg) {
   this->nomalImgPath = normalImg;
@@ -7,7 +6,6 @@ MyPushButton::MyPushButton(QString normalImg, QString pressImg) {
   QPixmap pix;
   bool    ret = pix.load(normalImg);
   if (!ret) {
-    qDebug() << "图片加载失败";
     return;
   }
   // 设置图片固定大小
@@ -58,7 +56,6 @@ void MyPushButton::mousePressEvent(QMouseEvent* e) {
     QPixmap pix;
     bool    ret = pix.load(this->pressImgPath);
     if (!ret) {
-      qDebug() << "图片加载失败";
       return;
     }
     // 设置图片固定大小
@@ -80,7 +77,6 @@ void MyPushButton::mouseReleaseEvent(QMouseEvent* e) {
     QPixmap pix;
     bool    ret = pix.load(this->nomalImgPath);
     if (!ret) {
-      qDebug() << "图片加载失败";
       return;
     }
     // 设置图片固定大小

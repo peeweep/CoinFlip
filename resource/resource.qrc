@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/">
+        <file>go-head.wav</file>
+        <file>go-go-go.wav</file>
+        <file>all-right.wav</file>
+        <file>aahhh.wav</file>
+        <file>dinner-is-served.wav</file>
+        <file>backbutton_press.png</file>
+        <file>backbutton_release.png</file>
+        <file>background1.png</file>
+        <file>coin0001.png</file>
+        <file>coin0002.png</file>
+        <file>coin0003.png</file>
+        <file>coin0004.png</file>
+        <file>coin0005.png</file>
+        <file>coin0006.png</file>
+        <file>coin0007.png</file>
+        <file>coin0008.png</file>
+        <file>coinBord.png</file>
+        <file>levelbord.png</file>
+        <file>playbord.jpg</file>
+        <file>playscene.jpg</file>
+        <file>start_normal.jpg</file>
+        <file>startButton_press.png</file>
+        <file>startButton_relase.png</file>
+        <file>success.png</file>
+        <file>timg.jpg</file>
+        <file>title.png</file>
+    </qresource>
+</RCC>
